@@ -149,6 +149,13 @@ def ensure_schema(db_path: str = None) -> dict:
             if _add_column(conn, 'um_audit_log', col, decl):
                 added_columns.append(f'um_audit_log.{col}')
 
+        # 扩展列上的索引（与 user_management_schema.sql 解耦，列补完后再建，
+        # 避免旧库升级时 CREATE INDEX 引用尚未存在的列而失败）。
+        conn.execute(
+            "CREATE INDEX IF NOT EXISTS idx_audit_resource "
+            "ON um_audit_log(resource_type, resource_id)"
+        )
+
         seeded = _seed_defaults(conn)
         conn.commit()
         return {

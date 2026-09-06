@@ -165,7 +165,9 @@ CREATE TABLE IF NOT EXISTS um_audit_log (
 );
 
 CREATE INDEX IF NOT EXISTS idx_audit_user ON um_audit_log(user_id, created_at);
-CREATE INDEX IF NOT EXISTS idx_audit_resource ON um_audit_log(resource_type, resource_id);
+-- idx_audit_resource 依赖阶段 0 扩展列(resource_type/resource_id)，这些列由
+-- modules.access_schema.ensure_schema 在补列后创建，避免旧库升级时
+-- "CREATE TABLE IF NOT EXISTS 跳过补列 → CREATE INDEX 引用缺失列" 报错。
 
 -- ============================================
 -- 10. 租户（最高隔离边界）
