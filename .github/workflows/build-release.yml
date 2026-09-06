@@ -67,12 +67,16 @@ jobs:
           name: build-log-windows-${{ env.ERR_SNIPPET }}
           path: build-windows.log
           if-no-files-found: warn
+        timeout-minutes: 10
+        continue-on-error: true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows
           path: dist/RaccoonX-Windows-x86_64-*.zip
+        timeout-minutes: 15
+        continue-on-error: true
 
   build-linux:
     # 临时屏蔽：manylinux2014 容器内 Pillow/JPype1 源码编译缺 jpeg 等系统库持续失败，
@@ -143,12 +147,16 @@ jobs:
           name: build-log-linux-${{ env.ERR_SNIPPET }}
           path: build-linux.log
           if-no-files-found: warn
+        timeout-minutes: 10
+        continue-on-error: true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: linux
           path: dist/RaccoonX-Linux-x86_64-*.tar.gz
+        timeout-minutes: 15
+        continue-on-error: true
 
   build-macos:
     name: Build macOS (${{ matrix.arch }})
@@ -193,12 +201,16 @@ jobs:
           name: build-log-macos-${{ matrix.arch }}-${{ env.ERR_SNIPPET }}
           path: build-macos-${{ matrix.arch }}.log
           if-no-files-found: warn
+        timeout-minutes: 10
+        continue-on-error: true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos-${{ matrix.arch }}
           path: dist/RaccoonX-macOS-${{ matrix.arch }}-*.tar.gz
+        timeout-minutes: 15
+        continue-on-error: true
 
   release:
     name: Attach to Release
@@ -222,16 +234,28 @@ jobs:
       - name: List artifacts
         run: find artifacts -type f -exec ls -lh {} \;
 
+      # 某个架构 artifact 上传可能因 GitHub Artifact Service 超时失败，
+      # 避免空 glob 导致 action-gh-release 报错；先把实际存在的产物汇总到统一目录。
+      - name: Collect release assets
+        run: |
+          mkdir -p release_assets
+          for pattern in artifacts/windows/*.zip artifacts/macos-arm64/*.tar.gz artifacts/macos-x86_64/*.tar.gz; do
+            for f in $pattern; do
+              if [ -f "$f" ]; then
+                cp "$f" release_assets/
+                echo "collected: $f"
+              fi
+            done
+          done
+          ls -lh release_assets/ || echo "no assets collected"
+
       - name: Create Release and upload binaries
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG }}
           generate_release_notes: true
           allowUpdates: true
-          files: |
-            artifacts/windows/*.zip
-            artifacts/macos-arm64/*.tar.gz
-            artifacts/macos-x86_64/*.tar.gz
+          files: release_assets/*
 
       # 打 tag 时自动追加安装提示（含 macOS 未签名/公证说明）
       - name: Append install notices to release

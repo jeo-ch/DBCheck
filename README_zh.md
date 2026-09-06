@@ -1025,6 +1025,7 @@ A：内置阈值基于通用最佳实践，请结合实际业务评估。
 | 2026-06-18 | 赵法威 | No.000010 |
 | 2026-06-19 | 类延良 | No.000011 |
 | 2026-06-19 | 渺渺兮予怀 | No.000012 |
+| 2026-09-6 | leon | No.000013 |
 ---
 
 > 作者：[Jack Ge](https://github.com/fiyo) &nbsp;|&nbsp; 官网：[https://dbcheck.top](https://dbcheck.top) &nbsp;|&nbsp; 邮箱：sdfiyon@gmail.com
