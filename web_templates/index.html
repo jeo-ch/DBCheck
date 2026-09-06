@@ -6734,10 +6734,10 @@ function wfCloseRunDrawer() {
       <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.6 7.6 11 16M16.4 7.6 13 16M8 6h8"/></svg></span> <span data-i18n="webui.nav_intelligence">智能诊断中心</span>
     </div>
     <div class="nav-item" onclick="showPage('workflow'); loadWorkflowPage()" id="nav-workflow">
-      <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4a3 3 0 0 1 3 3v4.5"/></svg></span> <span data-i18n="menu.workflow">Workflow 编排</span><span class="nav-dev-badge" data-i18n="menu.dev">开发中</span>
+      <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4a3 3 0 0 1 3 3v4.5"/></svg></span> <span data-i18n="menu.workflow">工作流编排</span>
     </div>
     <div class="nav-item" onclick="showPage('workflow-task'); loadWorkflowTaskPage()" id="nav-workflow-task">
-      <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4a3 3 0 0 1 3 3v4.5"/></svg></span> <span data-i18n="menu.workflow_task">工作流任务</span><span class="nav-dev-badge" data-i18n="menu.dev">开发中</span>
+      <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4a3 3 0 0 1 3 3v4.5"/></svg></span> <span data-i18n="menu.workflow_task">工作流任务</span>
     </div>
     {% if pro_available %}
     <div class="nav-item" onclick="showPage('flow')" id="nav-flow">
@@ -6798,9 +6798,6 @@ function wfCloseRunDrawer() {
     <div class="nav-item" onclick="showPage('remote-shell')" id="nav-remote-shell">
       <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><path d="m12 19 9 0"/></svg></span> <span data-i18n="remote_shell.title">远程终端</span>
     </div>
-    <div class="nav-item" onclick="showPage('oracle-client')" id="nav-oracle-client">
-      <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span> <span data-i18n="webui.nav_oracle_client">Oracle Client</span>
-    </div>
     <div class="nav-item" onclick="showPage('notifier')" id="nav-notifier">
       <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span> <span data-i18n="webui.nav_notifier">通知设置</span>
     </div>
@@ -6813,6 +6810,9 @@ function wfCloseRunDrawer() {
 
     <!-- ── 数据源与配置 ── -->
     <div class="nav-section">数据源与配置</div>
+    <div class="nav-item" onclick="showPage('oracle-client')" id="nav-oracle-client">
+      <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span> <span data-i18n="webui.nav_oracle_client">数据库驱动管理</span>
+    </div>
     <div class="nav-item" onclick="showPage('datasources')" id="nav-datasources">
       <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></span> <span data-i18n="webui.nav_datasources">数据源管理</span>
     </div>
